@@ -5,7 +5,10 @@
   <title>Bundled Page</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #112D32; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    html, body { background: #F3EEDD; min-height: 100%; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_thumbnail, #__bundler_loading, #__bundler_placeholder { display: none !important; visibility: hidden !important; opacity: 0 !important; }
+    body > svg { display: none !important; }
   </style>
   <noscript>
     <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
@@ -14,6 +17,18 @@
   </noscript>
 </head>
 <body>
+  <script>
+    // Remove any legacy preloader/thumbnail immediately, before the bundle starts unpacking.
+    (function () {
+      var ids = ['__bundler_thumbnail', '__bundler_loading', '__bundler_placeholder'];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }
+      var directSvgs = document.querySelectorAll('body > svg');
+      for (var j = 0; j < directSvgs.length; j++) directSvgs[j].remove();
+    })();
+  </script>
 
   <script>
     
